@@ -1,2 +1,71 @@
-Code
-IS
+myData = 'C:\Users\Cakir\Desktop\Ausland\Bild\Projekt_1\animals\my_pics';
+
+imds = imageDatastore(myData, 'IncludeSubfolders', true);
+imds.Labels = cellfun(@(x) categorical(contains(x, 'cat')), imds.Files);
+
+[imdsTrain, imdsTest] = splitEachLabel(imds, 0.8, 'randomize');
+
+% ==========================
+% HCD
+function features = extractHarrisFeatures(image)
+    corners = detectHarrisFeatures(rgb2gray(image));
+    features = strongestCorners(corners);
+end
+
+% ==========================
+% Extract the strongest corners
+function features = strongestCorners(corners)
+    numFeatures = 100;
+    strongest = selectStrongest(corners, numFeatures);
+    features = strongest.Location(:)';
+    features = padarray(features, [0 2*numFeatures-length(features)], 0, 'post');
+end
+
+trainFeaturesHarris = processImages(imdsTrain);
+testFeaturesHarris = processImages(imdsTest);
+
+function features = processImages(imds)
+    numImages = numel(imds.Files);
+    features = zeros(numImages, 200);
+for i = 1:numImages
+    img = readimage(imds, i);
+     features(i, :) = extractHarrisFeatures(img);
+    end
+end
+
+% ==========================
+% SVM for HCD
+classifierHarris = fitcsvm(trainFeaturesHarris, imdsTrain.Labels);
+predictedHarris = predict(classifierHarris, testFeaturesHarris);
+accuracyHarris = mean(predictedHarris == imdsTest.Labels) * 100;
+
+% ==========================
+% EfficientNet-B0-Modell
+inputSize = [224 224 3];
+imdsTrain.ReadFcn = @(filename)imresize(imread(filename), inputSize(1:2));
+imdsTest.ReadFcn = @(filename)imresize(imread(filename), inputSize(1:2));
+
+net = efficientnetb0;  % EfficientNet-B0 laden
+layer = 'efficientnet-b0|model|blocks_0|se|GlobAvgPool';
+
+trainFeaturesEfficientNet = activations(net, imdsTrain, layer, 'OutputAs', 'rows');
+testFeaturesEfficientNet = activations(net, imdsTest, layer, 'OutputAs', 'rows');
+
+% ==========================
+% SVM for EfficientNet-B0
+classifierEfficientNet = fitcsvm(trainFeaturesEfficientNet, imdsTrain.Labels);
+predictedEfficientNet = predict(classifierEfficientNet, testFeaturesEfficientNet);
+accuracyEfficientNet = mean(predictedEfficientNet == imdsTest.Labels) * 100;
+
+% ==========================
+% Comparison diagram
+figure;
+bar([accuracyHarris, accuracyEfficientNet]);
+title('Accuracy: Harris Corner vs. EfficientNet-B0');
+ylabel('Accuracy (%)');
+xticklabels({'Harris Corner', 'EfficientNet-B0'});
+ylim([0 100]);
+
+% Results
+fprintf('Harris Corner Accuracy: %.2f%%\n', accuracyHarris);
+fprintf('EfficientNet-B0 Accuracy: %.2f%%\n', accuracyEfficientNet);
