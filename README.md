@@ -117,9 +117,9 @@ The diagrams clearly show that EfficientNet-B0 consistently delivers more precis
 The results show that the pre-trained EfficientNet-B0 model performs significantly better than the Harris Corner model (50-60%) with an accuracy of 65-73%. This is because EfficientNet-B0 captures global and abstract features, while Harris Corner only analyzes local corners. Nevertheless, Harris Corner is a simple and resource-efficient method, while EfficientNet-B0 requires more powerful hardware. 
 I really enjoyed the project as it gave me new insights into image processing and the differences between classical and modern approaches. It was a valuable learning experience that broadened my knowledge in this field.
 ### Potential Improvements and Future Work
-**Larger data set:** Using a larger and more diverse data set could improve the performance of both models, especially the Harris Corner model, as it is more sensitive to small data sets.
-**Integration into real-time applications:** A future improvement could be to optimize the system so that it can classify images in real time, e.g. for mobile apps or camera systems.
-**More efficient models:** The use of more advanced pre-trained models could further increase accuracy and efficiency.
+- **Larger data set:** Using a larger and more diverse data set could improve the performance of both models, especially the Harris Corner model, as it is more sensitive to small data sets.
+- **Integration into real-time applications:** A future improvement could be to optimize the system so that it can classify images in real time, e.g. for mobile apps or camera systems.
+- **More efficient models:** The use of more advanced pre-trained models could further increase accuracy and efficiency.
 
 ## Sources
 1. https://de.mathworks.com/matlabcentral/answers/index
