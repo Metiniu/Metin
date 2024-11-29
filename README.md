@@ -1,14 +1,14 @@
 # distinguish between cats and dogs based on their image
 # Table of Contents
-- Project Goal
-- Personal note
-- Installation
-- Background
-- Data Preparation
-- Implementation
-- Results and Analysis
-- Conclusion
-- Sources
+- [Project Goal](#project-goal)
+- [Personal note](#personal-note)
+- [Installation](#installation)
+- [Background](#background)
+- [Data Preparation](#data-preparation)
+- [Implementation](#implementation)
+- [Results and Analysis](#results-and-analysis)
+- [Conclusion](#conclusion)
+- [Sources](#sources)
 ## Project Goal
 The goal of the project is to develop an image classification system in Matlab 
 that can distinguish between cats and dogs based on their images.
