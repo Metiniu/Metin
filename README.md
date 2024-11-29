@@ -1,4 +1,4 @@
-# distinguish between cats and dogs based on their image
+# **_distinguish between cats and dogs based on their image_**
 # Table of Contents
 - [Project Goal](#project-goal)
 - [Personal note](#personal-note)
