@@ -14,7 +14,7 @@ The goal of the project is to develop an image classification system in Matlab
 that can distinguish between cats and dogs based on their images.
 Two methods are used: Harris Corner Detection for a self-trained model and a pre-trained EfficientNet-B0 model.
 ## Personal note
-This project is my first practical project in the field of image processing and machine learning. Many of the ideas and solutions were developed through independent research on the internet and with the assistance of ChatGPT. 
+This project is my first practical project in the field of image processing and machine learning. Many of the ideas and solutions were developed through independent research on the internet. 
 Working on this project has significantly deepened my understanding of key concepts and techniques.
 ## Installation
 - MATLAB
