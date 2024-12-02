@@ -61,6 +61,9 @@ The data set used consists of cat and dog pictures stored in a folder called my_
 
 ## Implementation
 ### Preparation
+![image](https://github.com/user-attachments/assets/0ecea022-05ba-45d7-980a-3e2ac3f61245)
+
+
 1. set path: mydata refers to the folder containing the pictures of cats and dogs.
 2. load images: Using imageDatastore to create a MATLAB object that loads all images in the folder and subfolders.
 3. generate labels: contains(x, 'cat') checks whether the file name contains the word “cat” and assigns the label “cat” or “dog” accordingly.
